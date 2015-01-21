@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TasksForDevelopers
 {
-	//class Program
-	//{
+	class Program
+	{
 		//================================================OOP StaticFieldOfGeneric ====================================================================
 
 		//	static void Main()
@@ -72,7 +72,71 @@ namespace TasksForDevelopers
 		//return strings.ToArray();
 		//Тут можно наблюдать повторное исполнение LINQ-запроса, а значит мы вновь произойдёт вывод строк GetString: Foo и GetString: Bar.
 
+		//=======================================================LINK ClosureAndForeach =============================================================
 
+		static void Main()
+		{
+			var actions = new List<Action>();
+			foreach (var i in Enumerable.Range(1, 3))
+			  actions.Add(() => Console.WriteLine(i));
+			foreach (var action in actions)
+			  action();
+		}
 
-	
+		// В новых версиях компиляторов: 1 2 3.
+
+		//		Объяснение
+
+		//В старых версиях компиляторов приведённый код превращался в следующую конструкцию:
+
+		//public void Run()
+		//{
+		//  var actions = new List<Action>();
+		//  DisplayClass c1 = new DisplayClass();
+		//  foreach (int i in Enumerable.Range(1, 3))
+		//  {
+		//	с1.i = i;
+		//	list.Add(c1.Action);
+		//  }
+		//  foreach (Action action in list)
+		//	action();
+		//}
+
+		//private sealed class DisplayClass
+		//{
+		//  public int i;
+
+		//  public void Action()
+		//  {
+		//	Console.WriteLine(i);
+		//  }
+		//}
+		//Таким образом, все три элемента списка на самом деле являются одним и тем же делегатом, поэтому в консоли мы увидим три одинаковых значения, равных последнему значению i.
+
+		//В современных версиях компиляторов произошли изменения, новый вариант кода:
+
+		//public void Run()
+		//{
+		//  var actions = new List<Action>();
+		//  foreach (int i in Enumerable.Range(1, 3))
+		//  {
+		//	DisplayClass c1 = new DisplayClass();
+		//	с1.i = i;
+		//	list.Add(c1.Action);
+		//  }
+		//  foreach (Action action in list)
+		//	action();
+		//}
+
+		//private sealed class DisplayClass
+		//{
+		//  public int i;
+
+		//  public void Action()
+		//  {
+		//	Console.WriteLine(i);
+		//  }
+		//}
+		//Теперь каждый элемент списка ссылается на собственный делегат, так что все полученные значения будут разными.
+	}
 }

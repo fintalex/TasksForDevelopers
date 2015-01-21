@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Employees>
+	<Employee type="0">
+		<id>1</id>
+		<name>The .Net programmer</name>
+		<salary>8</salary>
+	</Employee>
+	<Employee type="1">
+		<id>2</id>
+		<name>Prog</name>
+		<salary>8000</salary>
+	</Employee>
+	<!--lot of records-->
+</Employees>

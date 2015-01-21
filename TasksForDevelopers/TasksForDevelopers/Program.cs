@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TasksForDevelopers
 {
-	class Program
-	{
+	//class Program
+	//{
 		//================================================OOP StaticFieldOfGeneric ====================================================================
 
 		//	static void Main()
@@ -72,8 +72,7 @@ namespace TasksForDevelopers
 		//return strings.ToArray();
 		//Тут можно наблюдать повторное исполнение LINQ-запроса, а значит мы вновь произойдёт вывод строк GetString: Foo и GetString: Bar.
 
-		
 
 
-	}
+	
 }

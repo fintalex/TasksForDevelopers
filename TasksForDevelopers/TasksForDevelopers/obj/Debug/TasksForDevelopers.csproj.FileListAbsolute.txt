@@ -1,0 +1,2 @@
+c:\users\s.harchenko\documents\visual studio 2012\Projects\TasksForDevelopers\TasksForDevelopers\bin\Debug\TasksForDevelopers.exe.config
+C:\Users\s.harchenko\Documents\GitHub\TasksForDevelopers\TasksForDevelopers\TasksForDevelopers\bin\Debug\TasksForDevelopers.exe.config

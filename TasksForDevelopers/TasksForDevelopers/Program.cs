@@ -74,14 +74,14 @@ namespace TasksForDevelopers
 
 		//=======================================================LINK ClosureAndForeach =============================================================
 
-		static void Main()
-		{
-			var actions = new List<Action>();
-			foreach (var i in Enumerable.Range(1, 3))
-			  actions.Add(() => Console.WriteLine(i));
-			foreach (var action in actions)
-			  action();
-		}
+		//static void Main()
+		//{
+		//	var actions = new List<Action>();
+		//	foreach (var i in Enumerable.Range(1, 3))
+		//	  actions.Add(() => Console.WriteLine(i));
+		//	foreach (var action in actions)
+		//	  action();
+		//}
 
 		// В новых версиях компиляторов: 1 2 3.
 
@@ -138,5 +138,30 @@ namespace TasksForDevelopers
 		//  }
 		//}
 		//Теперь каждый элемент списка ссылается на собственный делегат, так что все полученные значения будут разными.
+
+		//=======================================================LINK ClosureAndFor =============================================================
+
+		//static void Main()
+		//{
+		//	var actions = new List<Action>();
+		//	for (int i = 0; i < 3; i++)
+		//		actions.Add(() => Console.WriteLine(i));
+		//	foreach (var action in actions)
+		//		action();
+		//}
+
+		//=======================================================LINK QueryAfterRemove =============================================================
+
+		//static void Main()
+		//{
+		//	var list = new List<string> { "Foo", "Bar", "Baz" };
+		//	var query = list.Where(c => c.StartsWith("B"));
+		//	list.Remove("Bar");
+		//	Console.WriteLine(query.Count());
+		//}
+
+		//При вызове list.Where(c => c.StartsWith("B")) запрос будет только построен, но не выполнен. Реальное выполнение начнётся в момент вызов query.Count(). К этому времени значение list будет { "Foo", "Baz" }, а значит, будет найден только один элемент, начинающийся с буквы 'B'.
+
+
 	}
 }

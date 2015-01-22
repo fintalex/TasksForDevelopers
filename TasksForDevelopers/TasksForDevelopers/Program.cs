@@ -205,21 +205,120 @@ namespace TasksForDevelopers
 
 		//=======================================================LINK QueryWithInc =============================================================
 
-		static int Inc(int x)
-		{
-			Console.WriteLine("Inc: " + x);
-			return x + 1;
-		}
-		static void Main()
-		{
-			var numbers = Enumerable.Range(0, 10);
-			var query =
-			  (from number in numbers
-			   let number2 = Inc(number)
-			   where number2 % 2 == 0
-			   select number2).Take(2);
-			foreach (var number in query)
-				Console.WriteLine("Number: " + number);
-		}
+		//static int Inc(int x)
+		//{
+		//	Console.WriteLine("Inc: " + x);
+		//	return x + 1;
+		//}
+		//static void Main()
+		//{
+		//	var numbers = Enumerable.Range(0, 10);
+		//	var query =
+		//	  (from number in numbers
+		//	   let number2 = Inc(number)
+		//	   where number2 % 2 == 0
+		//	   select number2).Take(2);
+		//	foreach (var number in query)
+		//		Console.WriteLine("Number: " + number);
+		//}
+
+		//		Императивная версия кода выглядит следующим образом:
+
+		//var numbers = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		//var takenAmount = 0;
+		//for (int i = 0; i < numbers.Length; i++)
+		//{
+		//  var number = numbers[i];
+		//  Console.WriteLine("Inc: " + number);
+		//  var number2 = number + 1;
+		//  if (number2 % 2 == 0)
+		//  {
+		//	Console.WriteLine("Number: " + number2);
+		//	takenAmount++;
+		//	if (takenAmount == 2)
+		//	  break;
+		//  }
+		//}
+
+		//=======================================================LINK ExceptionYieldYield =============================================================
+
+		//public static IEnumerable<int> GetSmallNumbers()
+		//{
+		//	throw new Exception();
+		//	yield return 1;
+		//	yield return 2;
+		//}
+		//static void Main()
+		//{
+		//	var numbers = GetSmallNumbers();
+		//	var evenNumbers = numbers.Select(n => n * 2);
+		//	Console.WriteLine(evenNumbers.FirstOrDefault());
+		//}
+
+		//		Строчки
+
+		//var numbers = GetSmallNumbers();
+		//var evenNumbers = numbers.Select(n => n * 2);
+		//только строят запрос, но не исполняют его. Логика GetSmallNumbers() начнёт исполняться при первом вызове метода MoveNext(), который соответствует 
+		//вызову evenNumbers.FirstOrDefault(). В этот момент и произойдёт Exception.
+
+		//=======================================================LINK YieldExceptionYield =============================================================
+
+		//public static IEnumerable<int> GetSmallNumbers()
+		//{
+		//	yield return 1;
+		//	throw new Exception();
+		//	yield return 2;
+		//}
+		//static void Main()
+		//{
+		//	var numbers = GetSmallNumbers();
+		//	var evenNumbers = numbers.Select(n => n * 2);
+		//	Console.WriteLine(evenNumbers.FirstOrDefault());
+		//}
+
+		//		Exception не произойдёт.
+
+		//Объяснение
+
+		//Действительно, строка
+
+		//var numbers = GetSmallNumbers();
+		//только строит запрос, но не выполняет его. Строка
+
+		//var evenNumbers = numbers.Select(n => n * 2);
+		//также строит ещё один запрос без непосредственного выполнения. Отдельный интерес представляет последняя строка метода Main:
+
+		//Console.WriteLine(evenNumbers.FirstOrDefault());
+		//Данный вызов оценит получит только первый элемент запроса (одиночные вызовы MoveNext() и Current), дальнейшее получение элементов перечисления происходить не будет. Таким образом, код отработает без исключений.
+
+		//=======================================================LINK TryYieldFinally =============================================================
+
+		//public static IEnumerable<int> GetSmallNumbers()
+		//{
+		//	try
+		//	{
+		//		yield return 1;
+		//		yield return 2;
+		//	}
+		//	finally
+		//	{
+		//		Console.WriteLine("Foo");
+		//	}
+		//}
+		//static void Main()
+		//{
+		//	foreach (var item in GetSmallNumbers())
+		//	{
+		//		Console.WriteLine(item);
+		//	}
+		//	//1
+		//	//2
+		//	//	foo
+		//	// Поведение разно
+		//	Console.WriteLine(GetSmallNumbers().First());
+		//	//Foo
+		//	//	1
+		//}
 	}
 }

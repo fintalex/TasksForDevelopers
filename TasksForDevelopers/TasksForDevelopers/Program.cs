@@ -162,6 +162,64 @@ namespace TasksForDevelopers
 
 		//При вызове list.Where(c => c.StartsWith("B")) запрос будет только построен, но не выполнен. Реальное выполнение начнётся в момент вызов query.Count(). К этому времени значение list будет { "Foo", "Baz" }, а значит, будет найден только один элемент, начинающийся с буквы 'B'.
 
+		//=======================================================LINK ClosureAndVariable =============================================================
 
+		//static void Main()
+		//{
+		//	var list = new List<string> { "Foo", "Bar", "Baz" };
+		//	var startLetter = "F";
+		//	var query = list.Where(c => c.StartsWith(startLetter));
+		//	startLetter = "B";
+		//	query = query.Where(c => c.StartsWith(startLetter));
+		//	Console.WriteLine(query.Count());
+		//}
+
+		//		Приведённый код примет следующий вид:
+
+		//class DisplayClass
+		//{
+		//  public string startLetter;
+
+		//  public bool Method1(string c)
+		//  {
+		//	return c.StartsWith(this.startLetter);
+		//  }
+
+		//  public bool Method2(string c)
+		//  {
+		//	return c.StartsWith(this.startLetter);
+		//  }
+		//}
+
+		//void Main()
+		//{
+		//  DisplayClass displayClass = new DisplayClass();
+		//  var list1 = new List<string> { "Foo", "Bar", "Baz" };
+		//  var list2 = list1;
+		//  displayClass.startLetter = "F";
+		//  IEnumerable<string> source = list2.Where(displayClass.Method1);
+		//  displayClass.startLetter = "B";
+		//  Console.WriteLine(source.Where(displayClass.Method2).Count());
+		//}
+		//Выполнение запроса начнётся только в самой последней строчке кода. Как можно видеть, для обоих замыканий создался один и тот же вспомогательный класс. Сначала выполнится первый запрос list2.Where(displayClass.Method1) и вернёт { "Bar", "Baz" }, т.к. displayClass.startLetter к моменту исполнения равна "B". Далее выполнится запрос source.Where(displayClass.Method2), который также вернёт { "Bar", "Baz" }. Количество элементов в результате равно двум.
+
+		//=======================================================LINK QueryWithInc =============================================================
+
+		static int Inc(int x)
+		{
+			Console.WriteLine("Inc: " + x);
+			return x + 1;
+		}
+		static void Main()
+		{
+			var numbers = Enumerable.Range(0, 10);
+			var query =
+			  (from number in numbers
+			   let number2 = Inc(number)
+			   where number2 % 2 == 0
+			   select number2).Take(2);
+			foreach (var number in query)
+				Console.WriteLine("Number: " + number);
+		}
 	}
 }

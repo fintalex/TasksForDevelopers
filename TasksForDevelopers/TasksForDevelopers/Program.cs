@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -323,22 +324,53 @@ namespace TasksForDevelopers
 		//	//	1
 		//}
 
-		//======================================================= Математика Rounding1 =============================================================
+		//======================================================= Пример с подвохом =============================================================
 
+		//private static void Main()
+		//{
+		//	Bar(XmlWriter => XmlWriter.Flush());
+		//	Bar(XmlReader => XmlReader.Flush());
+		//}
+
+		//private static void Bar(Action<XmlWriter> x)
+		//{
+		//	Console.WriteLine("W");
+		//}
+
+		//private static void Bar(Action<XmlReader> x)
+		//{
+		//	Console.WriteLine("R");
+		//}
+
+		// ============================================ По конструкторам
+
+		abstract class Car
+		{
+			private int _speed;
+			public Car(int speed)
+			{
+				_speed = speed;
+			}
+		}
+		class Jigul : Car
+		{
+			public Jigul(int speed, int old)
+				: base(speed)
+			{ 
+
+			}
+		}
+		public static class Byke
+		{ 
+			
+		}
 		private static void Main()
 		{
-			Bar(XmlWriter => XmlWriter.Flush());
-			Bar(XmlReader => XmlReader.Flush());
+			//Car c = new Car(100);
+			Jigul j = new Jigul(80, 20);
+			//Byke byke = new Byke(); // Ошибка
+			//Car c = new Car(33);// Ошибка
 		}
-
-		private static void Bar(Action<XmlWriter> x)
-		{
-			Console.WriteLine("W");
-		}
-
-		private static void Bar(Action<XmlReader> x)
-		{
-			Console.WriteLine("R");
-		}
+		// если у базового класса нет конструктора без параметров - то нужно в дочернем вызвать конструктор какой есть явно
 	}
 }

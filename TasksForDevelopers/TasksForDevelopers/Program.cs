@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace TasksForDevelopers
 {
@@ -320,5 +322,23 @@ namespace TasksForDevelopers
 		//	//Foo
 		//	//	1
 		//}
+
+		//======================================================= Математика Rounding1 =============================================================
+
+		private static void Main()
+		{
+			Bar(XmlWriter => XmlWriter.Flush());
+			Bar(XmlReader => XmlReader.Flush());
+		}
+
+		private static void Bar(Action<XmlWriter> x)
+		{
+			Console.WriteLine("W");
+		}
+
+		private static void Bar(Action<XmlReader> x)
+		{
+			Console.WriteLine("R");
+		}
 	}
 }

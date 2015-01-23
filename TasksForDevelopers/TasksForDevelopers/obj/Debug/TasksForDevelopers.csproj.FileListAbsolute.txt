@@ -2,6 +2,5 @@ c:\users\s.harchenko\documents\visual studio 2012\Projects\TasksForDevelopers\Ta
 C:\Users\s.harchenko\Documents\GitHub\TasksForDevelopers\TasksForDevelopers\TasksForDevelopers\bin\Debug\TasksForDevelopers.exe.config
 C:\Users\s.harchenko\Documents\GitHub\TasksForDevelopers\TasksForDevelopers\TasksForDevelopers\bin\Debug\TasksForDevelopers.exe
 C:\Users\s.harchenko\Documents\GitHub\TasksForDevelopers\TasksForDevelopers\TasksForDevelopers\bin\Debug\TasksForDevelopers.pdb
-C:\Users\s.harchenko\Documents\GitHub\TasksForDevelopers\TasksForDevelopers\TasksForDevelopers\obj\Debug\TasksForDevelopers.csprojResolveAssemblyReference.cache
 C:\Users\s.harchenko\Documents\GitHub\TasksForDevelopers\TasksForDevelopers\TasksForDevelopers\obj\Debug\TasksForDevelopers.exe
 C:\Users\s.harchenko\Documents\GitHub\TasksForDevelopers\TasksForDevelopers\TasksForDevelopers\obj\Debug\TasksForDevelopers.pdb
